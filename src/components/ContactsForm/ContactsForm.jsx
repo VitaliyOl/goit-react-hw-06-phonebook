@@ -1,14 +1,9 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createContact } from '../../redux/store';
 import { Form, FormLabel, FormInput, FormButton } from './ContactsForm.styled';
 
 export const ContactsForm = ({ addContact }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const { contacts } = useSelector(state => state.contacts);
-
-  const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -26,8 +21,6 @@ export const ContactsForm = ({ addContact }) => {
 
     setName('');
     setNumber('');
-
-    dispatch(createContact(name, number));
   };
 
   return (

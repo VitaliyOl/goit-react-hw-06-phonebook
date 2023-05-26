@@ -1,23 +1,19 @@
 import { configureStore, nanoid } from '@reduxjs/toolkit';
 import { createAction, createReducer } from '@reduxjs/toolkit';
 
-export const createContact = createAction(
-  'myValue/increment',
-  (name, number) => {
-    return {
-      payload: {
-        id: nanoid(),
-        name,
-        number,
-      },
-    };
-  }
-);
+export const createContact = createAction('myValue/increment', data => {
+  return {
+    payload: {
+      ...data,
+      id: nanoid(),
+    },
+  };
+});
 
 const myReducer = createReducer(0, {});
 const contactsReducer = createReducer([], {
   [createContact]: (state, action) => {
-    state.contacts.push(action.payload);
+    state.push(action.payload);
   },
 });
 const filterReducer = createReducer('', {});
