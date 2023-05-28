@@ -5,7 +5,7 @@ import ContactsList from './ContactsList/ContactsList';
 import Filter from './Filter/Filter';
 import { Container } from './App.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { createContact } from '../redux/store';
+import { createContact, removeContacts } from '../redux/store';
 
 export const App = () => {
   // const [contacts, setContacts] = useState(
@@ -32,9 +32,10 @@ export const App = () => {
       : dispatch(createContact(data));
   };
 
-  // const deleteContacts = id => {
-  //   setContacts(contacts.filter(contact => contact.id !== id));
-  // };
+  const deleteContacts = id => {
+    // setContacts(contacts.filter(contact => contact.id !== id));
+    dispatch(removeContacts(id));
+  };
 
   const handleChange = e => {
     setFilter(e.target.value);
@@ -50,7 +51,7 @@ export const App = () => {
       <ContactsForm addContact={handleAddContact} />
       <h2>Contacts</h2>
       <Filter filter={filter} handleChange={handleChange} />
-      <ContactsList contacts={filterContact} />
+      <ContactsList contacts={filterContact} deleteContacts={deleteContacts} />
     </Container>
   );
 };
